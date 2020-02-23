@@ -1,5 +1,5 @@
 # SpaceCurves
  The SpaceCurves Package in Macaulay2
-
-The package tutorial is rendered by Macaulay2 in index.html. 
-Open with a browser.
+ 
+Open index.html with a browser to read the package tutorial rendered by Macaulay2.
+The turorial is for the V2 version of the package.
