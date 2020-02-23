@@ -1,0 +1,122 @@
+newPackage(
+        "CodimTwoACM",
+        Version => "1.0", 
+        Date => "June 2019",
+        Authors => {{Name => "Mengyuan Zhang", 
+                  Email => "myzhang@berkeley.edu", 
+                  HomePage => "https://math.berkeley.edu/~myzhang/"}
+	      },
+        Headline => "Codimension Two ACM subvarieties of P^n",
+        DebuggingMode => true
+        )
+
+export {
+	"UPP",
+	"castelnuovo",
+    	"hilbertBurch",	
+}
+
+
+makeCastelnuovo = method(Options => {UPP => true})
+makeCastelnuovo(ZZ,List) := opts -> (d,bin) -> (
+    --takes a list of partial castelnuovo functions of degree d
+    --produces a one step extension 
+    L := flatten apply(bin, C -> (
+	m := max C;
+    	if opts.UPP and C#-1 < C#-2 then (
+	    m = min(d-sum C,C#-1-1);
+	) else m = min(d-sum C,C#-1);     
+    	apply(splice{1..m}, i -> C |{i})		    
+    )
+    );
+    (select(L, C -> sum C == d), select(L, C -> sum C < d))   
+)
+castelnuovo = method(Options => {UPP => true})
+castelnuovo ZZ := opts -> d -> (
+    --generates all castelnuovo functions of degree d
+    --by default UPP
+    flatten apply(splice{2..floor (sqrt (2*d+1/4-1/2))}, s -> (
+	finished := {};
+	bin := {};
+	unfinished := {splice{1..s}};
+    	while (
+	    (finished, unfinished) = makeCastelnuovo(d,unfinished,UPP=>opts.UPP);	    
+	    bin = bin | finished;
+	    #unfinished > 0
+	) do ();
+	bin    
+    )	
+    )
+)
+
+diff List := G -> (G | {0}) - ({0} | G)
+hilbertBurch = method(Options => {UPP => false})
+hilbertBurch List := opts -> cs -> (
+    --takes a castelnuovo function
+    --returns all Hilbert-Burch degree matrices
+    cs = {0} | drop(diff diff cs,1);
+    B := flatten apply(positions(cs, i -> i>0), j-> splice{cs#j:j});
+    A := flatten apply(positions(cs, i -> i<0), j-> splice{-cs#j:j});
+    degs := {(A,B)};
+    bin := degs;
+    sp := {};
+    while (
+    	sp = flatten for AB in bin list (
+	    apply(splice{1+min first AB..-1+max last AB}, 
+		j -> (first AB | {j}, last AB | {j}))        
+	);
+    	sp = select(sp, AB -> 
+	    all(rsort last AB - drop(rsort first AB,-1),
+		j -> j>0));
+    	degs = unique (degs | sp);
+	bin = sp;
+	sp != {}
+    ) do ();
+    if opts.UPP then 
+    degs = select(degs, AB -> 
+	all(drop(rsort last AB,1)-drop(rsort first AB,-2),
+	    j -> j>0));
+    apply(degs, AB -> matrix apply(rsort first AB, l -> 
+	apply(rsort last AB, m -> m-l)))           
+)
+hilbertBurch ZZ := opts -> d -> (
+    flatten apply(castelnuovo(d, UPP => opts.UPP), 
+	cs -> hilbertBurch(cs, UPP => opts.UPP))    
+)
+random (Ring,Matrix) := opts -> (R,M) -> (
+    --produces a matrix of random forms in R with degrees 
+    --specified by M
+    matrix apply(entries M, row -> 
+	apply(row, a -> if a == 0 then 0 else random(a,R))) 
+)
+minors Matrix := opts -> M -> (
+    n := min(numcols M, numrows M);
+    minors(n,M)    
+)
+
+
+beginDocumentation()
+document {
+    PARA { 
+    	"The coordinate ring of a codimensional two projectively 
+    	Cohen-Macaulay subvariety of P^n is resolved by the Hilbert-Burch
+    	complex. Since graded Betti numbers are preserved by taking linear quotients
+    	for projectively Cohen-Macaulay varieties, we may deal with points in P^2. 
+    	The first difference of the Hilbert function of d points in P^2 is called 
+    	a castelnuovo function of degree d. The method ", TO castelnuovo, " produces
+    	all possible such functions. The method ", TO hilbertBurch, " generates
+    	all possible Hilbert-Burch degree matrix corresponding to a given castelnuovo function.
+    	This way, we may produce all possible projectively Cohen-Macaulay curves in P3, as well
+    	as codimensional two projectively Cohen-Macaulay subvarieties in general."
+	},
+    EXAMPLE {
+    	"L = castelnuovo 9",
+    	"B = hilbertBurch first L",
+    	"R = ZZ/101[x,y,z,w]",
+    	"I = minors random(R,first B)",
+    	"betti res I"
+    }
+}
+
+
+end
