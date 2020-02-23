@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>  <!-- for emacs: -*- coding: utf-8 -*- -->
+<!-- Apache may like this line in the file .htaccess: AddCharset utf-8 .html -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"	 "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head><title>scroll -- Produces a surface scroll P(O(a)+O(b)) in P^a+b+1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="/usr/share/Macaulay2/Style/doc.css"/>
+</head>
+<body>
+<table class="buttons">
+  <tr>
+    <td><div>next | <a href="_random__Points__In__P2.xhtml">previous</a> | forward | <a href="_random__Points__In__P2.xhtml">backward</a> | up | <a href="index.html">top</a> | <a href="master.xhtml">index</a> | <a href="toc.xhtml">toc</a> | <a href="http://www.math.uiuc.edu/Macaulay2/">Macaulay2 web site</a></div>
+
+    </td>
+  </tr>
+</table>
+<div><a href="index.html" title="Curves in Projective Spaces">SpaceCurves</a> :: <a href="_scroll.xhtml" title="Produces a surface scroll P(O(a)+O(b)) in P^a+b+1">scroll</a></div>
+<hr/>
+<div><h1>scroll -- Produces a surface scroll P(O(a)+O(b)) in P^a+b+1</h1>
+<div class="single"><h2>Description</h2>
+<div>This method produces a <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> encoding the scroll of type (a,b). More precisely, the underlying surface is the Hirzebruch surface H_e where e = |b-a|. The numerical group of H_e has a basis {C_e,f}, where C_e is the class of the -e curve and f is the class of a fiber. The polarization is given by the line bundle {1,b} in this basis.  Under a change of basis, this coincides with the projective bundle P(O(a)+O(b)) over P^1 polarized by O(1), whose image in P^a+b+1 is called a scroll of type (a,b).<div><h2>Synopsis</h2>
+<ul><li><dl class="element"><dt>Usage: </dt><dd><tt>X = scroll(L,kk)</tt></dd></dl>
+</li>
+<li>Inputs:<ul><li><span><tt>L</tt>, <span>a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml">list</a></span>, specifying the type {a,b}</span></li>
+<li><span><tt>kk</tt>, <span>a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Ring.xhtml">ring</a></span>, specifying the base field</span></li>
+</ul>
+</li>
+<li>Outputs:<ul><li><span><tt>X</tt>, <span>an object of class <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a></span>, encoding the Hirzebruch surface H_(b-a) polarized by {1,b}</span></li>
+</ul>
+</li>
+</ul>
+</div>
+<div><h2>Synopsis</h2>
+<ul><li><dl class="element"><dt>Usage: </dt><dd><tt>X = scroll L</tt></dd></dl>
+</li>
+</ul>
+</div>
+<p>If the Ring input is omitted, then the default base field is ZZ/101.</p>
+<table class="examples"><tr><td><pre>i1 : X = scroll({3,4},ZZ/7)
+
+o1 = A scroll of type {3, 4}
+
+o1 : PolarizedSurface</pre>
+</td></tr>
+<tr><td><pre>i2 : X = scroll {3,4}
+
+o2 = A scroll of type {3, 4}
+
+o2 : PolarizedSurface</pre>
+</td></tr>
+</table>
+<div><h2>Synopsis</h2>
+<ul><li><dl class="element"><dt>Usage: </dt><dd><tt>X = scroll(a,b,kk)</tt></dd></dl>
+</li>
+<li>Inputs:<ul><li><span><tt>a</tt>, <span>an <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Z__Z.xhtml">integer</a></span></span></li>
+<li><span><tt>b</tt>, <span>an <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Z__Z.xhtml">integer</a></span></span></li>
+<li><span><tt>kk</tt>, <span>a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Ring.xhtml">ring</a></span>, specifying the base field</span></li>
+</ul>
+</li>
+<li>Outputs:<ul><li><span><tt>X</tt>, <span>an object of class <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a></span>, encoding the Hirzebruch surface H_(b-a) polarized by {1,b}</span></li>
+</ul>
+</li>
+</ul>
+</div>
+<div><h2>Synopsis</h2>
+<ul><li><dl class="element"><dt>Usage: </dt><dd><tt>X = scroll(a,b)</tt></dd></dl>
+</li>
+</ul>
+</div>
+<table class="examples"><tr><td><pre>i3 : scroll(3,4,ZZ/7)
+
+o3 = A scroll of type {3, 4}
+
+o3 : PolarizedSurface</pre>
+</td></tr>
+<tr><td><pre>i4 : scroll(3,4)
+
+o4 = A scroll of type {3, 4}
+
+o4 : PolarizedSurface</pre>
+</td></tr>
+</table>
+</div>
+</div>
+<div class="waystouse"><h2>Ways to use <tt>scroll</tt> :</h2>
+<ul><li>scroll(List)</li>
+<li>scroll(List,Ring)</li>
+<li>scroll(ZZ,ZZ)</li>
+<li>scroll(ZZ,ZZ,Ring)</li>
+</ul>
+</div>
+</div>
+</body>
+</html>
+

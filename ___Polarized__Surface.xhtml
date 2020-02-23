@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>  <!-- for emacs: -*- coding: utf-8 -*- -->
+<!-- Apache may like this line in the file .htaccess: AddCharset utf-8 .html -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"	 "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head><title>PolarizedSurface -- A surface with a linear system</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="/usr/share/Macaulay2/Style/doc.css"/>
+</head>
+<body>
+<table class="buttons">
+  <tr>
+    <td><div><a href="_random__Points__In__P2.xhtml">next</a> | <a href="_ideal_lp__Polarized__Surface_rp.xhtml">previous</a> | <a href="_random__Points__In__P2.xhtml">forward</a> | <a href="_ideal_lp__Polarized__Surface_rp.xhtml">backward</a> | up | <a href="index.html">top</a> | <a href="master.xhtml">index</a> | <a href="toc.xhtml">toc</a> | <a href="http://www.math.uiuc.edu/Macaulay2/">Macaulay2 web site</a></div>
+
+    </td>
+  </tr>
+</table>
+<div><a href="index.html" title="Curves in Projective Spaces">SpaceCurves</a> :: <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a></div>
+<hr/>
+<div><h1>PolarizedSurface -- A surface with a linear system</h1>
+<div class="single"><h2>Description</h2>
+<div><p><a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> is a type of <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Hash__Table.xhtml" title="the class of all hash tables">HashTable</a> storing the information of a surface with a linear system.</p>
+<p>The key <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">SurfaceData</a> stores a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml" title="the class of all lists -- {...}">List</a> encoding defining characteristics of the <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a>. If the surface is the blowup of P^2 at finitely many points, then this list stores the list of ideals of these points.  If the surface is the scroll, then the list stores the type {a,b}.</p>
+<p>The key <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">IntersectionPairing</a> stores a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Matrix.xhtml" title="the class of all matrices">Matrix</a> encoding the intersection matrix of the numerical group of the surface. A basis of the numerical group is implicitly chosen.</p>
+<p>The key <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">HyperplaneClass</a> contains a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml" title="the class of all lists -- {...}">List</a> encoding the coordinates of the polarizing bundle with respect to the same basis as in the <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">IntersectionPairing</a>.</p>
+<p>The key <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">CanonicalClass</a> contains a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml" title="the class of all lists -- {...}">List</a> encoding the coordinates of the canonical bundle with respect to the same basis as in the <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">IntersectionPairing</a>.</p>
+<p>The key <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">LinearSystem</a> stores a row <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Matrix.xhtml" title="the class of all matrices">Matrix</a> whose entries form a vector space basis of the linear system of the polarizing bundle.</p>
+<p>The key <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">Chi</a> stores the Euler characteristic of the sheaf O_X.</p>
+<table class="examples"><tr><td><pre>i1 : X = blowupP2(1,{2,1})
+
+o1 = P^2 blown-up at 1 points
+          polarized by {2, 1}
+
+o1 : PolarizedSurface</pre>
+</td></tr>
+<tr><td><pre>i2 : peek X
+
+o2 = PolarizedSurface{CanonicalClass => {-3, -1}                                                                     }
+                      Chi => 1
+                      HyperplaneClass => {2, 1}
+                      IntersectionPairing => | 1 0  |
+                                             | 0 -1 |
+                      LinearSystem => | x_1^2+19x_1x_2 x_1x_2+19x_2^2 x_0^2+21x_0x_2 x_0x_1+21x_1x_2 x_0x_2+21x_2^2 |
+                      SurfaceData => {ideal (- 36x  - 24x , - 30x  - 24x , - 30x  + 36x )}
+                                                  0      1       0      2       1      2</pre>
+</td></tr>
+</table>
+<p>In the above example, the surface in question is the blowup of P^2 at a point p. A basis of its numberical group is given by pi^*O(1) and E, where pi^*O(1) is the pullback of the hyperplane class of P2 and E is the exceptional divisor of the blowup.  The second input is {2,1}, which is the coordinates of the polarizing bundle.  Thus we are mapping the blowup of P^2 at p by the linear system of conics passing through p.</p>
+</div>
+</div>
+<div class="single"><h2>See also</h2>
+<ul><li><span><a href="_ideal_lp__Polarized__Surface_rp.xhtml" title="Computes the ideal of the image surface">ideal(PolarizedSurface)</a> -- Computes the ideal of the image surface</span></li>
+</ul>
+</div>
+<div class="waystouse"><h2>Functions and methods returning an object of class PolarizedSurface :</h2>
+<ul><li><span>blowupP2(List), see <span><a href="_blowup__P2.xhtml" title="Blowup P^2 at given points and polarize by a given line bundle">blowupP2</a> -- Blowup P^2 at given points and polarize by a given line bundle</span></span></li>
+<li><span>blowupP2(List,List), see <span><a href="_blowup__P2.xhtml" title="Blowup P^2 at given points and polarize by a given line bundle">blowupP2</a> -- Blowup P^2 at given points and polarize by a given line bundle</span></span></li>
+<li><span>blowupP2(ZZ), see <span><a href="_blowup__P2.xhtml" title="Blowup P^2 at given points and polarize by a given line bundle">blowupP2</a> -- Blowup P^2 at given points and polarize by a given line bundle</span></span></li>
+<li><span>blowupP2(ZZ,List), see <span><a href="_blowup__P2.xhtml" title="Blowup P^2 at given points and polarize by a given line bundle">blowupP2</a> -- Blowup P^2 at given points and polarize by a given line bundle</span></span></li>
+</ul>
+<h2>Methods that use an object of class PolarizedSurface :</h2>
+<ul><li><span>divisor(List,PolarizedSurface), see <span><a href="_divisor.xhtml" title="Creates a Divisor on a PolarizedSurface">divisor</a> -- Creates a Divisor on a PolarizedSurface</span></span></li>
+<li><span>divisors(ZZ,PolarizedSurface), see <span><a href="_divisors.xhtml" title="Produces a list of Divisors">divisors</a> -- Produces a list of Divisors</span></span></li>
+<li><span><a href="_ideal_lp__Polarized__Surface_rp.xhtml" title="Computes the ideal of the image surface">ideal(PolarizedSurface)</a> -- Computes the ideal of the image surface</span></li>
+<li>net(PolarizedSurface)</li>
+</ul>
+</div>
+<div class="waystouse"><h2>For the programmer</h2>
+<p>The object <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> is <span>a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Type.xhtml">type</a></span>, with ancestor classes <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Hash__Table.xhtml" title="the class of all hash tables">HashTable</a> &lt; <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Thing.xhtml" title="the class of all things">Thing</a>.</p>
+</div>
+</div>
+</body>
+</html>
+

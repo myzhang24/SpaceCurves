@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>  <!-- for emacs: -*- coding: utf-8 -*- -->
+<!-- Apache may like this line in the file .htaccess: AddCharset utf-8 .html -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"	 "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head><title>randomPointsInP2 -- Creates a list of ideals of random points in P^2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="/usr/share/Macaulay2/Style/doc.css"/>
+</head>
+<body>
+<table class="buttons">
+  <tr>
+    <td><div><a href="_scroll.xhtml">next</a> | <a href="___Polarized__Surface.xhtml">previous</a> | <a href="_scroll.xhtml">forward</a> | <a href="___Polarized__Surface.xhtml">backward</a> | up | <a href="index.html">top</a> | <a href="master.xhtml">index</a> | <a href="toc.xhtml">toc</a> | <a href="http://www.math.uiuc.edu/Macaulay2/">Macaulay2 web site</a></div>
+
+    </td>
+  </tr>
+</table>
+<div><a href="index.html" title="Curves in Projective Spaces">SpaceCurves</a> :: <a href="_random__Points__In__P2.xhtml" title="Creates a list of ideals of random points in P^2">randomPointsInP2</a></div>
+<hr/>
+<div><h1>randomPointsInP2 -- Creates a list of ideals of random points in P^2</h1>
+<div class="single"><h2>Description</h2>
+<div>This method produces a list of ideals of random points (over the base field) in P^2.<div><h2>Synopsis</h2>
+<ul><li><dl class="element"><dt>Usage: </dt><dd><tt>L = randomPointsInP2(n,R)</tt></dd></dl>
+</li>
+<li>Inputs:<ul><li><span><tt>n</tt>, <span>an <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Z__Z.xhtml">integer</a></span>,  number of random points</span></li>
+<li><span><tt>R</tt>, <span>a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Ring.xhtml">ring</a></span>,  polynomial ring of P^2</span></li>
+</ul>
+</li>
+<li>Outputs:<ul><li><span><tt>L</tt>, <span>a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml">list</a></span>,  of ideals of points</span></li>
+</ul>
+</li>
+</ul>
+If the Ring input is omitted, the default ring is ZZ/101[x_0..x_2].<table class="examples"><tr><td><pre>i1 : randomPointsInP2 3
+
+o1 = {ideal (- 29x  - 24x , - 10x  - 24x , - 10x  + 29x ), ideal (19x  +
+                  0      1       0      2       1      2             0  
+     ------------------------------------------------------------------------
+     36x , - 29x  + 36x , - 29x  - 19x ), ideal (19x  + 30x , - 8x  + 30x , -
+        1       0      2       1      2             0      1      0      2   
+     ------------------------------------------------------------------------
+     8x  - 19x )}
+       1      2
+
+o1 : List</pre>
+</td></tr>
+</table>
+</div>
+</div>
+</div>
+<div class="waystouse"><h2>Ways to use <tt>randomPointsInP2</tt> :</h2>
+<ul><li>randomPointsInP2(ZZ)</li>
+<li>randomPointsInP2(ZZ,Ring)</li>
+</ul>
+</div>
+</div>
+</body>
+</html>
+

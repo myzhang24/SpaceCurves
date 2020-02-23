@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>  <!-- for emacs: -*- coding: utf-8 -*- -->
+<!-- Apache may like this line in the file .htaccess: AddCharset utf-8 .html -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"	 "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head><title>blowupP2 -- Blowup P^2 at given points and polarize by a given line bundle</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="/usr/share/Macaulay2/Style/doc.css"/>
+</head>
+<body>
+<table class="buttons">
+  <tr>
+    <td><div><a href="_chi_lp__Divisor_rp.xhtml">next</a> | <a href="index.html">previous</a> | <a href="_chi_lp__Divisor_rp.xhtml">forward</a> | <a href="index.html">backward</a> | up | <a href="index.html">top</a> | <a href="master.xhtml">index</a> | <a href="toc.xhtml">toc</a> | <a href="http://www.math.uiuc.edu/Macaulay2/">Macaulay2 web site</a></div>
+
+    </td>
+  </tr>
+</table>
+<div><a href="index.html" title="Curves in Projective Spaces">SpaceCurves</a> :: <a href="_blowup__P2.xhtml" title="Blowup P^2 at given points and polarize by a given line bundle">blowupP2</a></div>
+<hr/>
+<div><h1>blowupP2 -- Blowup P^2 at given points and polarize by a given line bundle</h1>
+<div class="single"><h2>Description</h2>
+<div>This method produces a <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> corresponding to the blowup of P^2 at a list of points, and polarized by a given divisor.<p>A basis of the numerical group is given by pi^*O(1), -E_1, ..., -E_n, where pi^*O(1) is the pullback of O(1) on P^2 and E_i are the exceptional divisors of the blowup.</p>
+<div><h2>Synopsis</h2>
+<ul><li><dl class="element"><dt>Usage: </dt><dd><tt>X = blowupP2(L,H)</tt></dd></dl>
+</li>
+<li>Inputs:<ul><li><span><tt>L</tt>, <span>a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml">list</a></span>,  of Ideals of points in P^2</span></li>
+<li><span><tt>H</tt>, <span>a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml">list</a></span>,  giving coordinates of the polarizing bundle</span></li>
+</ul>
+</li>
+<li>Outputs:<ul><li><span><tt>X</tt>, <span>an object of class <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a></span></span></li>
+</ul>
+</li>
+</ul>
+</div>
+If the polarizing line bundle is omitted from the second input, then the default polarizing bundle is the anti-canonical bundle.<div><h2>Synopsis</h2>
+<ul><li><dl class="element"><dt>Usage: </dt><dd><tt>X = blowupP2(L)</tt></dd></dl>
+</li>
+<li>Inputs:<ul><li><span><tt>L</tt>, <span>a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml">list</a></span>,  of Ideals of points in P^2</span></li>
+</ul>
+</li>
+<li>Outputs:<ul><li><span><tt>X</tt>, <span>an object of class <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a></span></span></li>
+</ul>
+</li>
+</ul>
+</div>
+<table class="examples"><tr><td><pre>i1 : L = randomPointsInP2 3
+
+o1 = {ideal (- 29x  - 24x , - 10x  - 24x , - 10x  + 29x ), ideal (19x  +
+                  0      1       0      2       1      2             0  
+     ------------------------------------------------------------------------
+     36x , - 29x  + 36x , - 29x  - 19x ), ideal (19x  + 30x , - 8x  + 30x , -
+        1       0      2       1      2             0      1      0      2   
+     ------------------------------------------------------------------------
+     8x  - 19x )}
+       1      2
+
+o1 : List</pre>
+</td></tr>
+<tr><td><pre>i2 : X = blowupP2(L,{4,2,1,0})
+
+o2 = P^2 blown-up at 3 points
+          polarized by {4, 2, 1, 0}
+
+o2 : PolarizedSurface</pre>
+</td></tr>
+<tr><td><pre>i3 : Y = blowupP2 L
+
+o3 = P^2 blown-up at 3 points
+          polarized by {3, 1, 1, 1}
+
+o3 : PolarizedSurface</pre>
+</td></tr>
+</table>
+<p>If the first input is an integer n, then the method blows up P^2 at n random points.</p>
+<div><h2>Synopsis</h2>
+<ul><li><dl class="element"><dt>Usage: </dt><dd><tt>X = blowupP2(n,H)</tt></dd></dl>
+</li>
+<li>Inputs:<ul><li><span><tt>n</tt>, <span>an <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Z__Z.xhtml">integer</a></span>,  number of random points to blowup</span></li>
+<li><span><tt>H</tt>, <span>a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml">list</a></span>,  coordinate of the polarizing bundle</span></li>
+</ul>
+</li>
+<li>Outputs:<ul><li><span><tt>X</tt>, <span>an object of class <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a></span></span></li>
+</ul>
+</li>
+</ul>
+</div>
+<div><h2>Synopsis</h2>
+<ul><li><dl class="element"><dt>Usage: </dt><dd><tt>X = blowupP2 n</tt></dd></dl>
+</li>
+<li>Inputs:<ul><li><span><tt>n</tt>, <span>an <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Z__Z.xhtml">integer</a></span>,  number of random points to blowup</span></li>
+</ul>
+</li>
+<li>Outputs:<ul><li><span><tt>X</tt>, <span>an object of class <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a></span></span></li>
+</ul>
+</li>
+</ul>
+</div>
+<table class="examples"><tr><td><pre>i4 : X = blowupP2(1,{2,1})
+
+o4 = P^2 blown-up at 1 points
+          polarized by {2, 1}
+
+o4 : PolarizedSurface</pre>
+</td></tr>
+<tr><td><pre>i5 : Y = blowupP2 6
+
+o5 = P^2 blown-up at 6 points
+          polarized by {3, 1, 1, 1, 1, 1, 1}
+
+o5 : PolarizedSurface</pre>
+</td></tr>
+</table>
+</div>
+</div>
+<div class="single"><h2>See also</h2>
+<ul><li><span><a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> -- A surface with a linear system</span></li>
+<li><span><a href="_scroll.xhtml" title="Produces a surface scroll P(O(a)+O(b)) in P^a+b+1">scroll</a> -- Produces a surface scroll P(O(a)+O(b)) in P^a+b+1</span></li>
+</ul>
+</div>
+<div class="waystouse"><h2>Ways to use <tt>blowupP2</tt> :</h2>
+<ul><li>blowupP2(List)</li>
+<li>blowupP2(List,List)</li>
+<li>blowupP2(ZZ)</li>
+<li>blowupP2(ZZ,List)</li>
+</ul>
+</div>
+</div>
+</body>
+</html>
+

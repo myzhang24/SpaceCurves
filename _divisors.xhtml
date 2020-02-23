@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>  <!-- for emacs: -*- coding: utf-8 -*- -->
+<!-- Apache may like this line in the file .htaccess: AddCharset utf-8 .html -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"	 "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head><title>divisors -- Produces a list of Divisors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="/usr/share/Macaulay2/Style/doc.css"/>
+</head>
+<body>
+<table class="buttons">
+  <tr>
+    <td><div><a href="_genus_lp__Divisor_rp.xhtml">next</a> | <a href="___Divisor_sp_pl_sp__Divisor.xhtml">previous</a> | <a href="_genus_lp__Divisor_rp.xhtml">forward</a> | <a href="___Divisor_sp_pl_sp__Divisor.xhtml">backward</a> | up | <a href="index.html">top</a> | <a href="master.xhtml">index</a> | <a href="toc.xhtml">toc</a> | <a href="http://www.math.uiuc.edu/Macaulay2/">Macaulay2 web site</a></div>
+
+    </td>
+  </tr>
+</table>
+<div><a href="index.html" title="Curves in Projective Spaces">SpaceCurves</a> :: <a href="_divisors.xhtml" title="Produces a list of Divisors">divisors</a></div>
+<hr/>
+<div><h1>divisors -- Produces a list of Divisors</h1>
+<div class="single"><h2>Description</h2>
+<div><p>The method <a href="_divisors.xhtml" title="Produces a list of Divisors">divisors(ZZ,PolarizedSurface)</a> produces a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml" title="the class of all lists -- {...}">List</a> of all <a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a>s of a given degree on a given <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a>.</p>
+<div><h2>Synopsis</h2>
+<ul><li><dl class="element"><dt>Usage: </dt><dd><tt>L = divisors(d,X)</tt></dd></dl>
+</li>
+<li>Inputs:<ul><li><span><tt>d</tt>, <span>an <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Z__Z.xhtml">integer</a></span>,  degree of the divisors</span></li>
+<li><span><tt>X</tt>, <span>an object of class <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a></span></span></li>
+</ul>
+</li>
+<li>Outputs:<ul><li><span><tt>L</tt>, <span>a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml">list</a></span>,  of all divisors of degree d on X</span></li>
+</ul>
+</li>
+</ul>
+<table class="examples"><tr><td><pre>i1 : X = scroll(1,2)
+
+o1 = A scroll of type {1, 2}
+
+o1 : PolarizedSurface</pre>
+</td></tr>
+<tr><td><pre>i2 : divisors(6,X)
+
+o2 = {{3, 3}, {2, 4}, {1, 5}}
+
+o2 : List</pre>
+</td></tr>
+</table>
+</div>
+<p>The method <a href="_divisors.xhtml" title="Produces a list of Divisors">divisors(ZZ,ZZ)</a> produces a non-exhaustive <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml" title="the class of all lists -- {...}">List</a> of <a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a>s of a given degree and genus across different <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a>s.</p>
+<div><h2>Synopsis</h2>
+<ul><li><dl class="element"><dt>Usage: </dt><dd><tt>L = divisors(d,g)</tt></dd></dl>
+</li>
+<li>Inputs:<ul><li><span><tt>d</tt>, <span>an <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Z__Z.xhtml">integer</a></span>,  degree of the Divisors</span></li>
+<li><span><tt>g</tt>, <span>an <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Z__Z.xhtml">integer</a></span>,  genus of the Divisors</span></li>
+</ul>
+</li>
+<li>Outputs:<ul><li><span><tt>L</tt>, <span>a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml">list</a></span>,  of Divisors</span></li>
+</ul>
+</li>
+</ul>
+<table class="examples"><tr><td><pre>i3 : divisors(5,8)
+
+o3 = {}
+
+o3 : List</pre>
+</td></tr>
+</table>
+</div>
+</div>
+</div>
+<div class="single"><h2>See also</h2>
+<ul><li><span><a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a> -- Divisors on a PolarizedSurface</span></li>
+</ul>
+</div>
+<div class="waystouse"><h2>Ways to use <tt>divisors</tt> :</h2>
+<ul><li>divisors(ZZ,PolarizedSurface)</li>
+<li>divisors(ZZ,ZZ)</li>
+</ul>
+</div>
+</div>
+</body>
+</html>
+

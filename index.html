@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8" ?>  <!-- for emacs: -*- coding: utf-8 -*- -->
+<!-- Apache may like this line in the file .htaccess: AddCharset utf-8 .html -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"	 "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head><title>SpaceCurves -- Curves in Projective Spaces</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="/usr/share/Macaulay2/Style/doc.css"/>
+</head>
+<body>
+<table class="buttons">
+  <tr>
+    <td><div><a href="_blowup__P2.xhtml">next</a> | previous | <a href="_blowup__P2.xhtml">forward</a> | backward | up | top | <a href="master.xhtml">index</a> | <a href="toc.xhtml">toc</a> | <a href="http://www.math.uiuc.edu/Macaulay2/">Macaulay2 web site</a></div>
+
+    </td>
+  </tr>
+</table>
+<div><a href="index.html" title="Curves in Projective Spaces">SpaceCurves</a> :: <a href="index.html" title="Curves in Projective Spaces">SpaceCurves</a></div>
+<hr/>
+<div><h1>SpaceCurves -- Curves in Projective Spaces</h1>
+<div class="single"><h2>Description</h2>
+<div><p><em>SpaceCurves</em> is a package that generates curves in projective spaces.</p>
+<h2>PolarizedSurface</h2>
+<p>The main idea is to generate curves C on surfaces X in P^n.</p>
+<p>The surface X can be thought of as the image under a rational map S ---> P^n of an abstract surface S. The data of the an abstract surface S along with a linear system, also called a polarization, is encoded in <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> which is a type of <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Hash__Table.xhtml" title="the class of all hash tables">HashTable</a>. The image of a suitable effective divisor D on S then gives us a curve C on X in P^n.</p>
+<p>The package provides two main ways to produce <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a>s, namely <a href="_blowup__P2.xhtml" title="Blowup P^2 at given points and polarize by a given line bundle">blowupP2</a> and <a href="_scroll.xhtml" title="Produces a surface scroll P(O(a)+O(b)) in P^a+b+1">scroll</a>, which we explain below in detail.</p>
+<h2>Blowing up P^2 at finitely many points</h2>
+<p>Let Z = z_1 .. z_m be finitely many points in P^2.  The linear system of plane curves of degree d that has multiplicity at least n_i at z_i corresponds to a rational map P^2 ---> P^n.</p>
+<p>Note that this map factors through the blowup P^2 ---> Bl_Z P^2 ---> P^n, thus this data also corresponds to a linear system on Bl_Z P^2.  The numerical group of Bl_Z P^2 has a basis pi^*O(1), -E_1, ..., -E_m, where pi^*O(1) is the pullback of the hyperplane class of P^2 via the blowup map, and E_i is the exceptional divisor of z_i.</p>
+<p>The method <a href="_blowup__P2.xhtml" title="Blowup P^2 at given points and polarize by a given line bundle">blowupP2</a> produces such a <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a>. The following example shows how to blowup P^2 at one point p and polarize by the linear system of conics through p.</p>
+<table class="examples"><tr><td><pre>i1 : R = ZZ/101[x_0..x_2];</pre>
+</td></tr>
+<tr><td><pre>i2 : L = {ideal(x_0,x_1)}
+
+o2 = {ideal (x , x )}
+              0   1
+
+o2 : List</pre>
+</td></tr>
+<tr><td><pre>i3 : X = blowupP2(L,{2,1})
+
+o3 = P^2 blown-up at 1 points
+          polarized by {2, 1}
+
+o3 : PolarizedSurface</pre>
+</td></tr>
+<tr><td><pre>i4 : peek X
+
+o4 = PolarizedSurface{CanonicalClass => {-3, -1}                          }
+                      Chi => 1
+                      HyperplaneClass => {2, 1}
+                      IntersectionPairing => | 1 0  |
+                                             | 0 -1 |
+                      LinearSystem => | x_1^2 x_1x_2 x_0^2 x_0x_1 x_0x_2 |
+                      SurfaceData => {ideal (x , x )}
+                                              0   1</pre>
+</td></tr>
+<tr><td><pre>i5 : ideal X
+
+                                              2
+o5 = ideal (x x  - x x , x x  - x x , x x  - x )
+             1 3    0 4   1 2    3 4   0 2    3
+
+               ZZ
+o5 : Ideal of ---[x , x , x , x , x ]
+              101  0   1   2   3   4</pre>
+</td></tr>
+</table>
+<h2>Rational Surface Scrolls</h2>
+<p>Readers may realize that the above surface is also the projective bundle P(O(1)+O(2)) over P^1 mapped by O(1) into P^1+2+1, the image is a scroll of type (1,2).  These scrolls are easy to produce and provide interesting ambient surfaces for the curves to lie on.</p>
+<p>We use toric geometry to find a basis of the linear system in the toric ring of the Hirzebruch surface H_e corresponding to the line bundle C_e+bf.  Here e = |b-a| and C_e is the class of -e curve and f is the class of a fiber.  The method <a href="_scroll.xhtml" title="Produces a surface scroll P(O(a)+O(b)) in P^a+b+1">scroll</a> achieves this.</p>
+<table class="examples"><tr><td><pre>i6 : Y = scroll(1,2)
+
+o6 = A scroll of type {1, 2}
+
+o6 : PolarizedSurface</pre>
+</td></tr>
+<tr><td><pre>i7 : peek Y
+
+o7 = PolarizedSurface{CanonicalClass => {-2, -3}                                   }
+                      Chi => 1
+                      HyperplaneClass => {1, 2}
+                      IntersectionPairing => | -1 1 |
+                                             | 1  0 |
+                      LinearSystem => | X_0^2X_3 X_0X_1X_3 X_0X_2 X_1^2X_3 X_1X_2 |
+                      SurfaceData => {1, 2}</pre>
+</td></tr>
+<tr><td><pre>i8 : ideal Y
+
+                                       2
+o8 = ideal (x x  - x x , x x  - x x , x  - x x )
+             2 3    1 4   1 2    0 4   1    0 3
+
+               ZZ
+o8 : Ideal of ---[x , x , x , x , x ]
+              101  0   1   2   3   4</pre>
+</td></tr>
+</table>
+<h2>Divisors on PolarizedSurface</h2>
+<p>The method <a href="_divisor.xhtml" title="Creates a Divisor on a PolarizedSurface">divisor</a> creates a <a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a> on a <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a>. Note that the <a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Coordinate</a>s of the <a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a> are written in the same basis of that the <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">IntersectionPairing</a> matrix is using.</p>
+<p>In the example below, although the surface X and Y are essentially the same, and the divisors C and D have the same coordinates, they are not the same divisor. On X the basis is taken to be { pi^*O(1), -E_1 } and on Y the basis is taken to be { C_1, f }.</p>
+<table class="examples"><tr><td><pre>i9 : C = divisor({2,0},X)
+
+o9 = {2, 0}
+
+o9 : Divisor</pre>
+</td></tr>
+<tr><td><pre>i10 : chi C
+
+o10 = 6
+
+o10 : QQ</pre>
+</td></tr>
+<tr><td><pre>i11 : D = divisor({2,0},Y)
+
+o11 = {2, 0}
+
+o11 : Divisor</pre>
+</td></tr>
+<tr><td><pre>i12 : chi D
+
+o12 = 0
+
+o12 : QQ</pre>
+</td></tr>
+</table>
+<h2>Generating a random curve in a Divisor class</h2>
+<p>The method <a href="_curve.xhtml" title="Computes the ideal of a random effective divisor">curve(Divisor)</a> takes a random effective divisor D in the given class on S, and computes the image of D under the rational map S ---> P^n given by the <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a>.</p>
+<table class="examples"><tr><td><pre>i13 : curve D
+
+              2                                         2         2
+o13 = ideal (x , x x  - x x , x x , x x , x x  - x x , x , x x , x )
+              3   2 3    1 4   1 3   0 3   1 2    0 4   1   0 1   0
+
+                ZZ
+o13 : Ideal of ---[x , x , x , x , x ]
+               101  0   1   2   3   4</pre>
+</td></tr>
+</table>
+<p>In case one wants to map D by a general m dimensional sub-linear system of the original system instead, i.e. consider the image of D under a general projection S ---> P^m, <a href="_curve.xhtml" title="Computes the ideal of a random effective divisor">curve(ZZ,Divisor)</a> computes the ideal of the image.</p>
+<table class="examples"><tr><td><pre>i14 : curve(3,D)
+
+              2              2                      2                       
+o14 = ideal (x  + 8x x  + 16x  + 25x x  - x x  + 30x , x x  + 4x x  + 12x x 
+              1     1 2      2      1 3    2 3      3   0 1     0 2      1 2
+      -----------------------------------------------------------------------
+           2                                2   2               2           
+      + 48x  - 38x x  - 16x x  - 15x x  + 2x , x  + 24x x  + 43x  - 32x x  +
+           2      0 3      1 3      2 3     3   0      0 2      2      0 3  
+      -----------------------------------------------------------------------
+                  2     2     3                            2          2  
+      20x x  - 47x , x x  + 4x  + 20x x x  + 42x x x  - 34x x  + 37x x  -
+         2 3      3   1 2     2      0 2 3      1 2 3      2 3      0 3  
+      -----------------------------------------------------------------------
+           2       2      3
+      10x x  + 3x x  - 10x )
+         1 3     2 3      3
+
+                ZZ
+o14 : Ideal of ---[x , x , x , x ]
+               101  0   1   2   3</pre>
+</td></tr>
+</table>
+<h2>Generating Divisors of given degree and genus</h2>
+<p>The method <a href="_divisors.xhtml" title="Produces a list of Divisors">divisors(ZZ,PolarizedSurface)</a> produces a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml" title="the class of all lists -- {...}">List</a> of all <a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a>s of a given degree on a given <a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a>.</p>
+<p>The method <a href="_divisors.xhtml" title="Produces a list of Divisors">divisors(ZZ,ZZ)</a> produces a non-exhaustive <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml" title="the class of all lists -- {...}">List</a> of <a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a>s of a given degree and genus on the smooth quadric and cubic surface as well as the ruled singular quartic surface in P^3. According to Gruson-Peskine, whenever such (degree, genus) is achieved by a smooth curve in P^3, such a curve can be found on one of the above surfaces.</p>
+<table class="examples"><tr><td><pre>i15 : divisors(8,5)
+
+o15 = {{6, 2}, {2, 6}, {5, 2, 1, 1, 1, 1, 1}, {6, 2, 2, 2, 2, 2, 0}, {5, 2,
+      -----------------------------------------------------------------------
+      1, 1, 1, 1, 1, 0, 0, 0}, {6, 2, 2, 2, 2, 2, 0, 0, 0, 0}}
+
+o15 : List</pre>
+</td></tr>
+</table>
+<p>Once we have a <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___List.xhtml" title="the class of all lists -- {...}">List</a> of <a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a>s or <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Ideal.xhtml" title="the class of all ideals">Ideal</a>s, we may want to visualize the occurence of the (degree, genus) pair. This can be done via <a href="_dg__Table.xhtml" title="prints the table of (degree,genus) pairs">dgTable(List)</a>.</p>
+<table class="examples"><tr><td><pre>i16 : M = flatten apply(splice{3..10}, 
+              d -> divisors(d, blowupP2 6))
+
+o16 = {{1, 0, 0, 0, 0, 0, 0}, {3, 1, 1, 1, 1, 1, 1}, {2, 1, 1, 0, 0, 0, 0},
+      -----------------------------------------------------------------------
+      {3, 1, 1, 1, 1, 1, 0}, {2, 1, 0, 0, 0, 0, 0}, {3, 1, 1, 1, 1, 0, 0},
+      -----------------------------------------------------------------------
+      {4, 2, 1, 1, 1, 1, 1}, {2, 0, 0, 0, 0, 0, 0}, {3, 1, 1, 1, 0, 0, 0},
+      -----------------------------------------------------------------------
+      {4, 2, 1, 1, 1, 1, 0}, {4, 1, 1, 1, 1, 1, 1}, {6, 2, 2, 2, 2, 2, 2},
+      -----------------------------------------------------------------------
+      {3, 1, 1, 0, 0, 0, 0}, {4, 2, 1, 1, 1, 0, 0}, {4, 1, 1, 1, 1, 1, 0},
+      -----------------------------------------------------------------------
+      {5, 2, 2, 1, 1, 1, 1}, {6, 2, 2, 2, 2, 2, 1}, {3, 1, 0, 0, 0, 0, 0},
+      -----------------------------------------------------------------------
+      {4, 2, 2, 0, 0, 0, 0}, {4, 2, 1, 1, 0, 0, 0}, {4, 1, 1, 1, 1, 0, 0},
+      -----------------------------------------------------------------------
+      {5, 2, 2, 1, 1, 1, 0}, {5, 2, 1, 1, 1, 1, 1}, {6, 2, 2, 2, 2, 2, 0},
+      -----------------------------------------------------------------------
+      {6, 2, 2, 2, 2, 1, 1}, {7, 3, 2, 2, 2, 2, 2}, {3, 0, 0, 0, 0, 0, 0},
+      -----------------------------------------------------------------------
+      {4, 2, 1, 0, 0, 0, 0}, {4, 1, 1, 1, 0, 0, 0}, {5, 2, 2, 1, 1, 0, 0},
+      -----------------------------------------------------------------------
+      {5, 2, 1, 1, 1, 1, 0}, {5, 1, 1, 1, 1, 1, 1}, {6, 2, 2, 2, 2, 1, 0},
+      -----------------------------------------------------------------------
+      {6, 2, 2, 2, 1, 1, 1}, {7, 3, 2, 2, 2, 2, 1}, {7, 2, 2, 2, 2, 2, 2},
+      -----------------------------------------------------------------------
+      {9, 3, 3, 3, 3, 3, 3}, {4, 2, 0, 0, 0, 0, 0}, {4, 1, 1, 0, 0, 0, 0},
+      -----------------------------------------------------------------------
+      {5, 2, 2, 1, 0, 0, 0}, {5, 2, 1, 1, 1, 0, 0}, {5, 1, 1, 1, 1, 1, 0},
+      -----------------------------------------------------------------------
+      {6, 2, 2, 2, 2, 0, 0}, {6, 2, 2, 2, 1, 1, 0}, {6, 2, 2, 1, 1, 1, 1},
+      -----------------------------------------------------------------------
+      {7, 3, 2, 2, 2, 2, 0}, {7, 3, 2, 2, 2, 1, 1}, {7, 2, 2, 2, 2, 2, 1},
+      -----------------------------------------------------------------------
+      {8, 3, 3, 2, 2, 2, 2}, {9, 3, 3, 3, 3, 3, 2}}
+
+o16 : List</pre>
+</td></tr>
+<tr><td><pre>i17 : dgTable M
+
+o17 = 12 |  .  .  .  .  .  .  .  1
+      11 |  .  .  .  .  .  .  .  1
+      10 |  .  .  .  .  .  .  1  1
+       9 |  .  .  .  .  .  .  1  1
+       8 |  .  .  .  .  .  .  1  2
+       7 |  .  .  .  .  .  1  1  1
+       6 |  .  .  .  .  .  1  2  2
+       5 |  .  .  .  .  1  2  1  1
+       4 |  .  .  .  1  1  1  1  1
+       3 |  .  .  .  1  1  1  1  1
+       2 |  .  .  1  1  1  1  1  1
+       1 |  1  1  1  1  1  2  1  .
+       0 |  1  1  1  1  .  .  .  .
+      ---+-------------------------
+      g/d|  3  4  5  6  7  8  9 10</pre>
+</td></tr>
+</table>
+<p>Finally a warning that the (degree, genus) of the <a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a>s might be different from those of the <a href="/usr/share/doc/Macaulay2/Macaulay2Doc/html/___Ideal.xhtml" title="the class of all ideals">Ideal</a>s of the image curve computed by <a href="_curve.xhtml" title="Computes the ideal of a random effective divisor">curve(Divisor)</a>. This happens when the polarization restricted to the random effective sample is not very ample.</p>
+</div>
+</div>
+<div class="single"><h2>Author</h2>
+<ul><li><div class="single"><a href="https://math.berkeley.edu/~myzhang/">Mengyuan Zhang</a><span> &lt;<a href="mailto:myzhang@berkeley.edu">myzhang@berkeley.edu</a>></span></div>
+</li>
+</ul>
+</div>
+<div class="single"><h2>Version</h2>
+This documentation describes version <b>2.0</b> of SpaceCurves.</div>
+<div class="single"><h2>Source code</h2>
+The source code from which this documentation is derived is in the file <a href="../../../../Macaulay2/SpaceCurves.m2">SpaceCurves.m2</a>.</div>
+<div class="single"><h2>Exports</h2>
+<div class="exports"><ul><li><div class="single">Types<ul><li><span><a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a> -- Divisors on a PolarizedSurface</span></li>
+<li><span><a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> -- A surface with a linear system</span></li>
+</ul>
+</div>
+</li>
+<li><div class="single">Functions and commands<ul><li><span><a href="_blowup__P2.xhtml" title="Blowup P^2 at given points and polarize by a given line bundle">blowupP2</a> -- Blowup P^2 at given points and polarize by a given line bundle</span></li>
+<li><span><a href="_curve.xhtml" title="Computes the ideal of a random effective divisor">curve</a> -- Computes the ideal of a random effective divisor</span></li>
+<li><span><a href="_dg__Table.xhtml" title="prints the table of (degree,genus) pairs">dgTable</a> -- prints the table of (degree,genus) pairs</span></li>
+<li><span><a href="_divisor.xhtml" title="Creates a Divisor on a PolarizedSurface">divisor</a> -- Creates a Divisor on a PolarizedSurface</span></li>
+<li><span><a href="_divisors.xhtml" title="Produces a list of Divisors">divisors</a> -- Produces a list of Divisors</span></li>
+<li><span><a href="_random__Points__In__P2.xhtml" title="Creates a list of ideals of random points in P^2">randomPointsInP2</a> -- Creates a list of ideals of random points in P^2</span></li>
+<li><span><a href="_scroll.xhtml" title="Produces a surface scroll P(O(a)+O(b)) in P^a+b+1">scroll</a> -- Produces a surface scroll P(O(a)+O(b)) in P^a+b+1</span></li>
+</ul>
+</div>
+</li>
+<li><div class="single">Methods<ul><li><span><a href="_chi_lp__Divisor_rp.xhtml" title="Euler characteristics of a Divisor">chi(Divisor)</a> -- Euler characteristics of a Divisor</span></li>
+<li><span>curve(Divisor), see <span><a href="_curve.xhtml" title="Computes the ideal of a random effective divisor">curve</a> -- Computes the ideal of a random effective divisor</span></span></li>
+<li><span>curve(ZZ,Divisor), see <span><a href="_curve.xhtml" title="Computes the ideal of a random effective divisor">curve</a> -- Computes the ideal of a random effective divisor</span></span></li>
+<li><span><a href="_degree_lp__Divisor_rp.xhtml" title="Degree of a Divisor">degree(Divisor)</a> -- Degree of a Divisor</span></li>
+<li><span>net(Divisor), see <span><a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a> -- Divisors on a PolarizedSurface</span></span></li>
+<li><span>divisor(List,PolarizedSurface), see <span><a href="_divisor.xhtml" title="Creates a Divisor on a PolarizedSurface">divisor</a> -- Creates a Divisor on a PolarizedSurface</span></span></li>
+<li><span>Divisor * Divisor, see <span><a href="___Divisor_sp_pl_sp__Divisor.xhtml" title="Operations on divisors">Divisor + Divisor</a> -- Operations on divisors</span></span></li>
+<li><span><a href="___Divisor_sp_pl_sp__Divisor.xhtml" title="Operations on divisors">Divisor + Divisor</a> -- Operations on divisors</span></li>
+<li><span>Divisor - Divisor, see <span><a href="___Divisor_sp_pl_sp__Divisor.xhtml" title="Operations on divisors">Divisor + Divisor</a> -- Operations on divisors</span></span></li>
+<li><span>QQ * Divisor, see <span><a href="___Divisor_sp_pl_sp__Divisor.xhtml" title="Operations on divisors">Divisor + Divisor</a> -- Operations on divisors</span></span></li>
+<li><span>ZZ * Divisor, see <span><a href="___Divisor_sp_pl_sp__Divisor.xhtml" title="Operations on divisors">Divisor + Divisor</a> -- Operations on divisors</span></span></li>
+<li><span>divisors(ZZ,PolarizedSurface), see <span><a href="_divisors.xhtml" title="Produces a list of Divisors">divisors</a> -- Produces a list of Divisors</span></span></li>
+<li><span><a href="_genus_lp__Divisor_rp.xhtml" title="Genus of a Divisor">genus(Divisor)</a> -- Genus of a Divisor</span></li>
+<li><span><a href="_ideal_lp__Polarized__Surface_rp.xhtml" title="Computes the ideal of the image surface">ideal(PolarizedSurface)</a> -- Computes the ideal of the image surface</span></li>
+<li><span>net(PolarizedSurface), see <span><a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> -- A surface with a linear system</span></span></li>
+</ul>
+</div>
+</li>
+<li><div class="single">Symbols<ul><li><span>Coordinate, see <span><a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a> -- Divisors on a PolarizedSurface</span></span></li>
+<li><span>Surface, see <span><a href="___Divisor.xhtml" title="Divisors on a PolarizedSurface">Divisor</a> -- Divisors on a PolarizedSurface</span></span></li>
+<li><span>CanonicalClass, see <span><a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> -- A surface with a linear system</span></span></li>
+<li><span>Chi, see <span><a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> -- A surface with a linear system</span></span></li>
+<li><span>HyperplaneClass, see <span><a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> -- A surface with a linear system</span></span></li>
+<li><span>IntersectionPairing, see <span><a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> -- A surface with a linear system</span></span></li>
+<li><span>LinearSystem, see <span><a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> -- A surface with a linear system</span></span></li>
+<li><span>SurfaceData, see <span><a href="___Polarized__Surface.xhtml" title="A surface with a linear system">PolarizedSurface</a> -- A surface with a linear system</span></span></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>
+
